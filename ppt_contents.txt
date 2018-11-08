@@ -1,0 +1,37 @@
+main_title = "NBCC powerpoint template \n- Generate ppt by Python -"
+writer = "Woohyun Kim"
+
+titlebar_background = "c:/Github/pptx/images/title_back.png"
+
+page1_title = "Overview"
+page1_desc = "Find the bullet slide layout. Find the bullet slide layout"
+page1_fig = "Figure 1. Work flowchart"
+page1_fig_path = "c:/Github/pptx/test_img/001.jpg"
+
+page2_title = "MD simulation"
+page2_desc = "Use TextFrame.text for first bullet"
+page2_fig = "Figure 2. proteins"
+page2_fig_path = "c:/Github/pptx/test_img/002.jpg"
+
+page3_title = "Adding a Bullet Slide"
+page3_desc = "1. Use TextFrame.add_paragraph() for subsequent bullets 2. Find the bullet slide layout 3. Find the bullet slide layout"
+page3_fig = "Table 1. Adding a Bullet Slide"
+page3_fig_path = ""
+
+page4_title = ""
+page4_desc = ""
+
+page5_title = ""
+page5_desc = ""
+
+page6_title = ""
+page6_desc = ""
+
+page7_title = ""
+page7_desc = "
+
+page8_title = ""
+page8_desc = ""
+
+page9_title = ""
+page9_desc = ""
