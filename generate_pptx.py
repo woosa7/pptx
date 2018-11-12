@@ -1,6 +1,6 @@
 import sys
 import os
-import subprocess
+import datetime
 from pptx import Presentation
 from pptx.util import Pt, Cm
 from pptx.enum.text import PP_ALIGN
@@ -63,13 +63,21 @@ mywindow = MyWindow()
 mywindow.show()
 app.exec_()
 
-save_filename = mywindow.lineEdit.text()+'.pptx'
+save_filename = mywindow.lineEdit.text()
+if len(save_filename) == 0:
+    save_filename = 'noname'
+
+# Test
+# save_filename = '111'
+
+save_filename = save_filename+'.pptx'
 
 # -----------------------------------------------------------------------------------------
 # predefine parameters
 
 main_title = ""
 writer = ""
+present_date = ""
 titlebar_background = ""
 department1 = "Nano/Bio Computational Chemistry Lab."
 department2 = "Department of Chemistry, Sookmyung Women’s University, Seoul, Korea"
@@ -120,6 +128,7 @@ slide.shapes.add_picture(image_file2, Cm(23.2), Cm(0), Cm(2.2))
 
 # Main Title
 text_box = slide.shapes.add_textbox(Cm(1.0), Cm(4.0), Cm(23.4), Cm(3.0))
+text_box.text_frame.word_wrap = True
 p = text_box.text_frame.paragraphs[0]
 p.text = main_title
 p.font.bold = True
@@ -143,10 +152,14 @@ p2.font.size = Pt(14)
 p2.font.name = 'Malgun Gothic'
 p2.alignment = PP_ALIGN.CENTER
 
-# Writer
-text_box = slide.shapes.add_textbox(Cm(1.0), Cm(15.0), Cm(23.4), Cm(1.0))
+# Writer & Date
+if len(present_date) == 0:
+    present_date = datetime.datetime.now().strftime('%Y.%m.%d.')
+
+
+text_box = slide.shapes.add_textbox(Cm(1.0), Cm(14.0), Cm(23.4), Cm(1.5))
 p = text_box.text_frame.paragraphs[0]
-p.text = writer
+p.text = writer + '\n' + present_date
 p.font.size = Pt(14)
 p.font.name = 'Malgun Gothic'
 p.alignment = PP_ALIGN.CENTER
@@ -159,8 +172,11 @@ page_len = len(title_list)
 for k in range(page_len):
     slide = prs.slides.add_slide(blank_slide_layout)
 
-    if len(titlebar_background) > 0:
+    # Title background image
+    exist_titlebar = False
+    if Path(titlebar_background).is_file():
         slide.shapes.add_picture(titlebar_background, Cm(0), Cm(0), Cm(25.4), Cm(2.28))
+        exist_titlebar = True
 
     # Title
     text_box = slide.shapes.add_textbox(Cm(1.0), Cm(0.3), Cm(23.4), Cm(1.62))
@@ -169,7 +185,7 @@ for k in range(page_len):
     p.font.name = 'Arial'
     p.font.bold = True
     p.alignment = PP_ALIGN.CENTER
-    if len(titlebar_background) > 0:
+    if exist_titlebar:
         p.font.color.rgb = RGBColor(255, 255, 255)
     else:
         p.font.color.rgb = RGBColor(0, 0, 0)

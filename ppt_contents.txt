@@ -1,5 +1,6 @@
-main_title = "NBCC powerpoint template \n- Generate ppt by Python -"
+main_title = "NBCC powerpoint template Generate ppt by Python"
 writer = "Woohyun Kim"
+present_date = ""
 
 titlebar_background = "c:/Github/pptx/images/title_back.png"
 
