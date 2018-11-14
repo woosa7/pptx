@@ -2,7 +2,7 @@ main_title = "NBCC powerpoint template Generate ppt by Python"
 writer = "Woohyun Kim"
 present_date = ""
 
-titlebar_background = "c:/Github/pptx/images/title_back.png"
+#titlebar_background = "c:/Github/pptx/images/title_back.png"
 
 page1_title = "Overview"
 page1_desc = "Find the bullet slide layout. Find the bullet slide layout"
@@ -29,10 +29,4 @@ page6_title = ""
 page6_desc = ""
 
 page7_title = ""
-page7_desc = "
-
-page8_title = ""
-page8_desc = ""
-
-page9_title = ""
-page9_desc = ""
+page7_desc = ""

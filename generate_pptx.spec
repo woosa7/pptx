@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['generate_pptx.py'],
-             pathex=['C:\\Github\\NBCC\\pptx'],
+             pathex=['C:\\Github\\pptx'],
              binaries=[],
              datas=[],
              hiddenimports=[],

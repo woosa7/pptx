@@ -1,12 +1,14 @@
 import sys
 import os
 import datetime
+from pathlib import Path
+from PyQt5.QtWidgets import *
 from pptx import Presentation
 from pptx.util import Pt, Cm
 from pptx.enum.text import PP_ALIGN
+from pptx.enum.shapes import MSO_SHAPE
+from pptx.enum.dml import MSO_THEME_COLOR
 from pptx.dml.color import RGBColor
-from pathlib import Path
-from PyQt5.QtWidgets import *
 
 save_filename = ''
 
@@ -98,14 +100,14 @@ if Path(params_file).is_file():
         cont = str[idx+1:].replace('"', '')
         if len(cont) > 0 and str[:1] != '#':
             if str[:4] == 'page':
-                if str[6:11] == 'title':
+                if 'title' in str:
                     title_list.append(str)
-                if str[6:10] == 'fig ':
-                    fig_list.append(str)
-                if str[6:10] == 'fig_':
-                    img_list.append(str)
-                if str[6:10] == 'desc':
+                if 'desc' in str:
                     desc_list.append(str)
+                if 'fig ' in str:
+                    fig_list.append(str)
+                if 'fig_' in str:
+                    img_list.append(str)
             else:
                 exec(str)
 
@@ -177,6 +179,16 @@ for k in range(page_len):
     if Path(titlebar_background).is_file():
         slide.shapes.add_picture(titlebar_background, Cm(0), Cm(0), Cm(25.4), Cm(2.28))
         exist_titlebar = True
+    else:
+        # 이미 없으면 타이틀 아래 밑줄
+        shapes = slide.shapes
+        shape = shapes.add_shape(
+            MSO_SHAPE.ROUNDED_RECTANGLE, Cm(1.0), Cm(2.2), Cm(23.4), Cm(0.22)
+        )
+        fill = shape.fill
+        fill.solid()
+        fill.fore_color.theme_color = MSO_THEME_COLOR.ACCENT_1
+        fill.fore_color.brightness = -0.25
 
     # Title
     text_box = slide.shapes.add_textbox(Cm(1.0), Cm(0.3), Cm(23.4), Cm(1.62))
@@ -194,23 +206,27 @@ for k in range(page_len):
     if content[:5] == 'page{}'.format(k+1):
         idx = content.find('"')
         p.text = content[idx+1:].replace('"', '')
+    elif content[:6] == 'page{}'.format(k + 1):
+        idx = content.find('"')
+        p.text = content[idx + 1:].replace('"', '')
     else:
         p.text = 'Title'
 
     # Figure
-    text_box = slide.shapes.add_textbox(Cm(1.5), Cm(16.0), Cm(22.4), Cm(1.0))
-    p = text_box.text_frame.paragraphs[0]
-    p.font.size = Pt(14)
-    p.font.name = 'Tahoma'
-    p.font.bold = True
-    p.alignment = PP_ALIGN.LEFT
+    if len(fig_list) >= k + 1:  # fig 존재
+        text_box = slide.shapes.add_textbox(Cm(1.5), Cm(16.0), Cm(22.4), Cm(1.0))
+        p = text_box.text_frame.paragraphs[0]
+        p.font.size = Pt(14)
+        p.font.name = 'Tahoma'
+        p.font.bold = True
+        p.alignment = PP_ALIGN.LEFT
 
-    content = fig_list[k]
-    if content[:5] == 'page{}'.format(k+1):
-        idx = content.find('"')
-        p.text = content[idx+1:].replace('"', '')
-    else:
-        p.text = 'Figure 0.'
+        content = fig_list[k]
+        if content[:5] == 'page{}'.format(k+1):
+            idx = content.find('"')
+            p.text = content[idx+1:].replace('"', '')
+        else:
+            p.text = 'Figure 0.'
 
     # Figure image & Description
     content = desc_list[k]
