@@ -1,23 +1,26 @@
-main_title = "NBCC powerpoint template Generate ppt by Python"
+main_title = "NBCC powerpoint template \nGenerate ppt by Python"
 writer = "Woohyun Kim"
 present_date = ""
 
-#titlebar_background = "c:/Github/pptx/images/title_back.png"
+titlebar_background = "c:/Github/pptx/images/title_back.png"
 
-page1_title = "Overview"
-page1_desc = "Find the bullet slide layout. Find the bullet slide layout"
+page1_title = "MD Simulation Overview"
+page1_desc = "Necessary settings and important notices."
 page1_fig = "Figure 1. Work flowchart"
 page1_fig_path = "c:/Github/pptx/test_img/001.jpg"
 
-page2_title = "MD simulation"
-page2_desc = "Use TextFrame.text for first bullet"
-page2_fig = "Figure 2. proteins"
+page2_title = "MD Trajectory Analysis"
+page2_desc = "Cpptraj : RMSD, RMSF, Rg, end-to-end distance, secondary structure"
+page2_fig = "Figure 2. 1ABC protein"
 page2_fig_path = "c:/Github/pptx/test_img/002.jpg"
 
-page3_title = "Adding a Bullet Slide"
-page3_desc = "1. Use TextFrame.add_paragraph() for subsequent bullets 2. Find the bullet slide layout 3. Find the bullet slide layout"
-page3_fig = "Table 1. Adding a Bullet Slide"
+page3_title = "Protein Effective Energy"
+page3_desc = "Solvent-averaged effective energy, f = Eu + Gsolv, consists of the protein potential energy (Eu) and the solvation free energy (Gsolv), whose time variation reflects the protein dynamics on the free energy landscape."
+page3_fig = "Table 1. solvation free energy of 1ABC protein"
 page3_fig_path = ""
+
+# If you want to add more pages,
+# add the title and desc in order of number as shown below.
 
 page4_title = ""
 page4_desc = ""

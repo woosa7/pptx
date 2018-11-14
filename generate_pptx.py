@@ -155,9 +155,10 @@ p2.font.name = 'Malgun Gothic'
 p2.alignment = PP_ALIGN.CENTER
 
 # Writer & Date
+if len(writer) == 0:
+    writer ="Your Name"
 if len(present_date) == 0:
     present_date = datetime.datetime.now().strftime('%Y.%m.%d.')
-
 
 text_box = slide.shapes.add_textbox(Cm(1.0), Cm(14.0), Cm(23.4), Cm(1.5))
 p = text_box.text_frame.paragraphs[0]
