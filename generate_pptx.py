@@ -21,7 +21,7 @@ class MyWindow(QMainWindow):
         self.setGeometry(800, 400, 300, 120)
 
         # Label
-        label = QLabel("저장할 파일명", self)
+        label = QLabel("Name of file:", self)
         label.move(20, 20)
 
         # LineEdit
@@ -52,7 +52,7 @@ class MyWindow(QMainWindow):
     def btn1_clicked(self):
         save_filename = self.lineEdit.text()
         if len(save_filename) == 0:
-            self.statusBar.showMessage('저장할 파일명을 입력하세요!')
+            self.statusBar.showMessage('Enter the name of file!')
         else:
             self.close()
 
